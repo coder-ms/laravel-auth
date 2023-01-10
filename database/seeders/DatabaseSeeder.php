@@ -20,5 +20,10 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        //Lancio tutti i seeder in contemporanea
+        $this->call([
+            PostTableSeeder::class,
+        ]);
     }
 }
