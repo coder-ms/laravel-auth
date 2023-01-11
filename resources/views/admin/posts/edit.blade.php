@@ -16,7 +16,7 @@
     <h1 class="text-center">EDIT POST {{$post->title}}</h1>
     <div class="row bg-white">
         <div class="col-12">
-            <form action="{{route('admin.posts.update', $post->slug)}}" method="POST" class="p-4">
+            <form action="{{route('admin.posts.update', $post->slug)}}" method="POST" class="p-4" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                   <div class="mb-3">

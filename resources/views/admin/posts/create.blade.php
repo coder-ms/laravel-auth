@@ -16,8 +16,7 @@
     <h1 class="text-center">CREATE POST</h1>
     <div class="row bg-white">
         <div class="col-12">
-            {{--PROBLEMS--}}
-            {{-- 
+
             <form action="{{route('admin.posts.store')}}" method="POST" class="p-4">
                 @csrf
                   <div class="mb-3">
@@ -56,7 +55,7 @@
                   <button type="submit" class="btn btn-success">Submit</button>
                   <button type="reset" class="btn btn-primary">Reset</button>
             </form>
-            --}}
+            
         </div>
     </div>
 

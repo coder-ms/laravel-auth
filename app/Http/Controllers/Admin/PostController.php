@@ -51,9 +51,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Post $post)
     {
-        return view('admin.posts.show');
+        return view('admin.posts.show', compact('post'));
     }
 
     /**
@@ -62,9 +62,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        return view('admin.posts.edit');
+        return view('admin.posts.edit', compact('post'));
     }
 
     /**
@@ -74,7 +74,7 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatPostRequest $request, $id)
+    public function update(UpdatPostRequest $request, Post $post)
     {
         //
     }
@@ -82,8 +82,9 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * 
+     * @param  \App\Models\Post  $post
+     * 
      */
     public function destroy(Post $post)
     {
