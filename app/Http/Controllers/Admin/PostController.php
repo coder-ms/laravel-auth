@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\StorePostRequest;
+use App\Http\Requests\UpdatPostRequest;
 use App\Models\Post;
 
 class PostController extends Controller
@@ -35,9 +36,13 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
-        //
+        $data = $request->vadidated();
+        $slug = Post::generateSlug($request->title);
+        $data['slug'] = $slug;
+        $new_post = Post::create($data);
+        return redirect()->route('admin.posts.show', $new_post->slug);
     }
 
     /**
@@ -69,7 +74,7 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdatPostRequest $request, $id)
     {
         //
     }
@@ -80,8 +85,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        return redirect()->route('admin.posts.index')->with('message', "$post->title deleted succesfully");
     }
 }
