@@ -19,9 +19,12 @@ class PostTableSeeder extends Seeder
     {
         for ($i = 0; $i < 10; $i++) {
             $post = new Post();
-            $post->title = $faker->sentence(3);
+            $post->title = $faker->words(3, true);
             $post->slug = Str::slug($post->title, '-');
-            $post->content = $faker->text(500);
+            $post->content = $faker->paragraph();
+            $post->framework = $faker->words(4, true);
+            $post->link_git = $faker->url();
+            $post->lvl_diff = $faker->numberBetween(1,10);
             $post->save();
         }
     }

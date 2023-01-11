@@ -15,14 +15,15 @@ main{
 }
 
 
-.card {
+.cardx {
     background-color: transparent;
-    width: 20%;
-    max-height: 40vh;
+    width: 50%;
+    height: 80vh;
     text-decoration: none;
     margin: 20px 0;
+    border: 1px solid black;
 
-    .cardDescription {
+    .cardDescriptionx {
         width: 100%;
         height: 100%;
         padding: 10px;
