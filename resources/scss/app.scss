@@ -17,10 +17,10 @@ main{
 
 .cardx {
     background-color: transparent;
-    width: 50%;
-    height: 80vh;
+    width: 45%;
+    height: 40vh;
     text-decoration: none;
-    margin: 20px 0;
+    margin: 20px 10px;
     border: 1px solid black;
 
     .cardDescriptionx {
@@ -30,6 +30,10 @@ main{
         background-color: #bbb;
         color: black;
         font-weight: 700;
+
+        a{
+            text-decoration: none;  
+        }
     }
 }
 
