@@ -1,3 +1,11 @@
+$fa-font-path: "../fonts/font-awesome" !default;
+
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+@import "~@fortawesome/fontawesome-free/scss/regular";
+@import "~@fortawesome/fontawesome-free/scss/solid";
+@import "~@fortawesome/fontawesome-free/scss/brands";
+
+@import '~bootstrap/scss/bootstrap';
 
 body{
     font-family: sans-serif;
@@ -37,7 +45,7 @@ main{
 
     .cardDescriptionx {
         padding: 10px;
-        max-height: 100%;
+        height: 100%;
         background-color: #bbb;
         color: black;
         font-weight: 700;
