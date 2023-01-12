@@ -46,12 +46,15 @@
                     <input type="text" class="form-control" id="lvl_diff" name="lvl_diff" aria-describedby="levelHelp" required>
                     <div id="levelHelp" class="form-text">Scala di diifcoltà da 1(facile) a 10(molto difficile)</div>
                   </div>
-                    <!--
-                    <div class="mb-3">
-                        <label for="image" class="form-label">Url Immagine</label>
-                        <input type="text" class="form-control" id="image" name="image" required>
-                    </div>
-                    -->
+                    {{--
+                      <div class="mb-3">
+                        <label for="cover_image" class="form-label">Immagine</label>
+                        <input type="file" name="cover_image" id="cover_image" class="form-control  @error('cover_image') is-invalid @enderror" >
+                        @error('cover_image')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                      </div>
+                    --}}
                   <button type="submit" class="btn btn-success">Submit</button>
                   <button type="reset" class="btn btn-primary">Reset</button>
             </form>

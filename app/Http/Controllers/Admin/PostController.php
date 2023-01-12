@@ -6,7 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
-
+/*
+use App\Models\Category;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
+*/
 class PostController extends Controller
 {
     /**
@@ -23,7 +27,7 @@ class PostController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * 
      */
     public function create()
     {
@@ -34,11 +38,11 @@ class PostController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * 
      */
     public function store(StorePostRequest $request)
     {
-        $data = $request->vadidated();
+        $data = $request->validated();
         $slug = Post::generateSlug($request->title);
         $data['slug'] = $slug;
         $new_post = Post::create($data);
