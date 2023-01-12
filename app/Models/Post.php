@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 class Post extends Model
 {
     use HasFactory;
-    protected $fillable = ['title', 'slug', 'content', 'framework', 'link_git', 'lvl_diff'];
+    protected $fillable = ['title', 'slug', 'content', 'framework', 'link_git', 'lvl_diff', 'cover_image'];
 
     public static function generateSlug($title){
         return Str::slug($title, '-');

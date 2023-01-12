@@ -6,9 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
+use Illuminate\Support\Facades\Storage;
 /*
 use App\Models\Category;
-use Illuminate\Support\Facades\Storage;
+
 use Illuminate\Support\Facades\Auth;
 */
 class PostController extends Controller
@@ -42,9 +43,16 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
+        //$userId = Auth::id();
         $data = $request->validated();
         $slug = Post::generateSlug($request->title);
         $data['slug'] = $slug;
+        //$data['user_id'] = $userId;
+        if($request->hasFile('cover_image')){
+            $path = Storage::disk('public')->put('post_images', $request->cover_image);
+            $data['cover_image'] = $path;
+        }
+
         $new_post = Post::create($data);
         return redirect()->route('admin.posts.show', $new_post->slug);
     }
@@ -80,10 +88,14 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
+        /*
+        if(!Auth::user()->isAdmin() && $post->user_id !== Auth::id()){
+            abort(403);
+        }
+        */
         $data = $request->validated();
         $slug = Post::generateSlug($request->title);
         $data['slug'] = $slug;
-        /*
         if($request->hasFile('cover_image')){
             if ($post->cover_image) {
                 Storage::delete($post->cover_image);
@@ -92,7 +104,6 @@ class PostController extends Controller
             $path = Storage::disk('public')->put('post_images', $request->cover_image);
             $data['cover_image'] = $path;
         }
-        */
         $post->update($data);
         return redirect()->route('admin.posts.index')->with('message', "$post->title updated successfully");
     }
@@ -106,6 +117,11 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        /*
+        if(!Auth::user()->isAdmin() && $post->user_id !== Auth::id()){
+            abort(403);
+        }
+        */
         $post->delete();
         return redirect()->route('admin.posts.index')->with('message', "$post->title deleted succesfully");
     }
