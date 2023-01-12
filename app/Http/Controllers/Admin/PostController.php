@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePostRequest;
-use App\Http\Requests\UpdatPostRequest;
+use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
 
 class PostController extends Controller
@@ -74,9 +74,23 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatPostRequest $request, Post $post)
+    public function update(UpdatePostRequest $request, Post $post)
     {
-        //
+        $data = $request->validated();
+        $slug = Post::generateSlug($request->title);
+        $data['slug'] = $slug;
+        /*
+        if($request->hasFile('cover_image')){
+            if ($post->cover_image) {
+                Storage::delete($post->cover_image);
+            }
+
+            $path = Storage::disk('public')->put('post_images', $request->cover_image);
+            $data['cover_image'] = $path;
+        }
+        */
+        $post->update($data);
+        return redirect()->route('admin.posts.index')->with('message', "$post->title updated successfully");
     }
 
     /**
