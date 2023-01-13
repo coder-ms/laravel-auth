@@ -15,7 +15,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::all(); //orderByDesc('id')->get();
+        //dd($categories);
+        return view('admin.categories.index', compact('categories'));
     }
 
     /**
