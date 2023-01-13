@@ -15,6 +15,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        // Category::all(); in ordine di numero post che hanno una specifica categoria
         $categories = Category::all(); //orderByDesc('id')->get();
         //dd($categories);
         return view('admin.categories.index', compact('categories'));
@@ -45,11 +46,11 @@ class CategoryController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
+     * 
      */
     public function show(Category $category)
     {
-        //
+        return view('admin.categories.show', compact('category'));
     }
 
     /**

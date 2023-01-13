@@ -1,7 +1,13 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
-    <h1> {{$post->title}}</h1>
-    <p>{{$post->content}}</p>
-    <img width="300" src="{{asset('storage/' . $post->cover_image)}}" alt="">
+
+    <h1>{{$category->name}}</h1>
+    <ul>
+        @foreach ($categories as $post)
+            <li>{{$post->title}}</li>
+        @endforeach
+    </ul>
+
+
 @endsection
