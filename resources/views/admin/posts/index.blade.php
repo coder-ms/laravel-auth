@@ -28,7 +28,7 @@
             </thead>
             <tbody>
                 @foreach ($posts as $post)
-                @if( $post->user_id == $ActUserId )
+                @if( ($post->user_id == $ActUserId) || $isUserAdmin )
                     <tr>
                         <th scope="row">{{$post->id}}</th>
                         <td><a class="text-decoration-none" href="{{route('admin.posts.show', $post->slug)}}" title="View Post">{{$post->title}}</a></td>
@@ -45,7 +45,7 @@
                            
                         </td>
                         <td>{{$post->lvl_diff}} / {{$lvl_diff_max}}</td>
-                        <td>{{Str::limit($post->content, 60)}}</td>
+                        <td>{{Str::limit($post->content, 120)}}</td>
                         <td>{{$post->user_id}} / {{$ActUserId}}</td>
                         <td><a class="text-decoration-none" href="{{($post->link_git)}}">{{$post->link_git}}</a></td>
                         <td><a class="link-secondary" href="{{route('admin.posts.edit', $post->slug)}}"><i class="fa-solid fa-pen"></i></a></td>

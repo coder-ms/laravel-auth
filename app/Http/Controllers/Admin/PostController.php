@@ -21,18 +21,29 @@ class PostController extends Controller
      */
     public function index()
     {
+        // Se Adimn(1 su is_Admin -> database), visualizziamo tutti i post
         if(Auth::user()->isAdmin()){
+            //$userId = Auth::id();
+            //dd($userId);
             $posts = Post::all();
         } 
+        // Se Utente(0 su is_Admin -> database), visualizziamo solo i propri post
         else {
+            //$userId = Auth::id();
+            //dd($userId);
+            //$posts = Post::where('user_id', $userId)->get();
+
             $userId = Auth::id();
             $posts = Post::where('user_id', $userId)->get();
         }
         $ActUserId = Auth::id();
+        $isUserAdmin = Auth::user()->isAdmin();
         $lvl_diff_max = PostController::$level_diff_max;
+        //dd($ActUserId);
+        //dd((Auth::user()->isAdmin()));
         $posts = Post::all();
         $categories = Category::all();
-        return view('admin.posts.index', compact('posts', 'categories', 'ActUserId', 'lvl_diff_max'));
+        return view('admin.posts.index', compact('posts', 'categories', 'ActUserId', 'isUserAdmin', 'lvl_diff_max'));
     }
 
     /**
