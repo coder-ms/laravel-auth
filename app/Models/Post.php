@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Post extends Model
 {
     use HasFactory;
-    protected $fillable = ['title', 'slug', 'content', 'framework', 'link_git', 'lvl_diff', 'cover_image'];
+    protected $fillable = [ 'user_id', 'category_id', 'cover_image', 'title', 'slug', 'content', 'link_git', 'lvl_diff'];
 
     public static function generateSlug($title){
         return Str::slug($title, '-');

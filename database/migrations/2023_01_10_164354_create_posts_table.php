@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('title', 150)->unique();
             $table->string('slug');
             $table->text('content')->nullable();
-            $table->string('framework')->nullable();
+            $table->string('category_id')->nullable();
             $table->string('link_git')->nullable();
             $table->unsignedTinyInteger('lvl_diff')->nullable();
             $table->timestamps();

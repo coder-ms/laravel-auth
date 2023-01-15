@@ -11,20 +11,18 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     *
      */
     public function index()
     {
-        // Category::all(); in ordine di numero post che hanno una specifica categoria
-        $categories = Category::all(); //orderByDesc('id')->get();
-        //dd($categories);
+        $categories = Category::all();
         return view('admin.categories.index', compact('categories'));
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * 
+     *
      */
     public function create()
     {
@@ -39,14 +37,20 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        //
+        $data = $request->validated();
+        // dd($request);
+        $slug = Category::generateSlug($request->name);
+        $data['slug'] = $slug;
+        $data['name'] = $request->name;
+        // dd($data);
+        $new_category = Category::create($data);
+        return redirect()->route('admin.categories.show', $new_category->slug);
     }
 
     /**
      * Display the specified resource.
      *
      * @param  \App\Models\Category  $category
-     * 
      */
     public function show(Category $category)
     {
@@ -69,21 +73,28 @@ class CategoryController extends Controller
      *
      * @param  \App\Http\Requests\UpdateCategoryRequest  $request
      * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
+     *
      */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
-        //
+        $data = $request->validated();
+        $slug = Category::generateSlug($request->name);
+        $data['slug'] = $slug;
+        $data['name'] = $request->name;
+        $category->update($data);
+        return redirect()->route('admin.categories.index')->with('message', "$category->name updated successfully");
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
+     *
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return redirect()->route('admin.categories.index')->with('message', "$category->name deleted successfully");
+
     }
 }

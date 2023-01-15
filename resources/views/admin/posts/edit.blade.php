@@ -30,10 +30,18 @@
                     <label for="content" class="form-label">Contenuto</label>
                     <textarea class="form-control" id="content" name="content">"{{old('content', $post->content)}}</textarea>
                   </div>
-                  
+
                   <div class="mb-3">
-                    <label for="framework" class="form-label">Tipologia di framework:</label>
-                    <input type="text" class="form-control" id="framework" name="framework" value="{{old('framework', $post->framework)}}" required>
+                    <label for="category_id" class="form-label">Seleziona categoria di framework:</label>
+                    <select name="category_id" id="category_id" class="form-control @error('category_id') is-invalid @enderror">
+                      <option value="">Select category</option>
+                      @foreach ($categories as $category)
+                          <option value="{{$category->id}}" {{ $category->id == old('category_id', $post->category_id) ? 'selected' : '' }}>{{$category->name}}</option>
+                      @endforeach
+                    </select>
+                    @error('category_id')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                   </div>
 
                   <div class="mb-3">
@@ -41,10 +49,14 @@
                     <input type="text" class="form-control" id="link_git" name="link_git" value="{{old('link_git', $post->link_git)}}" required>
                   </div>
 
-                  <div class="mb-3">
+                   <div class="mb-3">
                     <label for="lvl_diff" class="form-label">Livello di Difficoltà:</label>
-                    <input type="text" class="form-control" id="lvl_diff" name="lvl_diff" aria-describedby="levelHelp" value="{{old('lvl_diff', $post->lvl_diff)}}" required>
-                    <div id="levelHelp" class="form-text">Scala di diifcoltà da 1(facile) a 10(molto difficile)</div>
+                    <select name="lvl_diff" id="lvl_diff" aria-describedby="levelHelp" required>
+                      @for($ix=1; $ix <= $lvl_diff_max; $ix++)
+                        <option value="{{$ix}}" {{old('lvl_diff', $post->lvl_diff == $ix ? 'selected' : '')}}>{{$ix}}</option>
+                      @endfor
+                    </select>
+                   <div id="levelHelp" class="form-text">Scala di diffcoltà da 1(facile) a {{$lvl_diff_max}}(molto difficile)</div>
                   </div>
 
                   <div class="d-flex">

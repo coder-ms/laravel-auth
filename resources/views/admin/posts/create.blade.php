@@ -32,8 +32,16 @@
                   </div>
                   
                   <div class="mb-3">
-                    <label for="framework" class="form-label">Tipologia di framework:</label>
-                    <input type="text" class="form-control" id="framework" name="framework" required>
+                    <label for="category_id" class="form-label">Seleziona categoria di framework:</label>
+                    <select name="category_id" id="category_id" class="form-control @error('category_id') is-invalid @enderror">
+                      <option value="">Select category</option>
+                      @foreach ($categories as $category)
+                          <option value="{{$category->id}}">{{$category->name}}</option>
+                      @endforeach
+                    </select>
+                    @error('category_id')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                   </div>
 
                   <div class="mb-3">
@@ -42,11 +50,15 @@
                   </div>
 
                   <div class="mb-3">
-                    <label for="lvl_diff" class="form-label">Livello di Difficoltà:</label>
-                    <input type="text" class="form-control" id="lvl_diff" name="lvl_diff" aria-describedby="levelHelp" required>
-                    <div id="levelHelp" class="form-text">Scala di diifcoltà da 1(facile) a 10(molto difficile)</div>
+                    <label for="lvl_diff" class="form-label">Livello</label>
+                   <select name="lvl_diff" id="lvl_diff" aria-describedby="levelHelp" required>
+                    @for($ix=1; $ix <= $lvl_diff_max; $ix++)
+                      <option value="{{$ix}}">{{$ix}}</option>
+                    @endfor
+                   </select>
+                   <div id="levelHelp" class="form-text">Scala di diffcoltà da 1(facile) a {{$lvl_diff_max}}(molto difficile)</div>
                   </div>
-                    
+
                   <div class="mb-3">
                     <label for="cover_image" class="form-label">Immagine</label>
                     <input type="file" name="cover_image" id="cover_image" class="form-control  @error('cover_image') is-invalid @enderror" >
