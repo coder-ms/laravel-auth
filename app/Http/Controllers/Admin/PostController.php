@@ -76,7 +76,8 @@ class PostController extends Controller
         $data['link_git'] = $request->link_git;
         $data['lvl_diff'] = $request->lvl_diff;
         if($request->hasFile('cover_image')){
-            $path = Storage::disk('public')->put('post_images', $request->cover_image);
+            //$path = Storage::disk('public')->put('post_images', $request->cover_image);
+            $path = Storage::put('post_images', $request->cover_image);
             $data['cover_image'] = $path;
         }
         
@@ -133,8 +134,8 @@ class PostController extends Controller
             if ($post->cover_image) {
                 Storage::delete($post->cover_image);
             }
-
-            $path = Storage::disk('public')->put('post_images', $request->cover_image);
+            //$path = Storage::disk('public')->put('post_images', $request->cover_image);
+            $path = Storage::put('post_images', $request->cover_image);
             $data['cover_image'] = $path;
         }
         //dd($data);
@@ -153,6 +154,9 @@ class PostController extends Controller
     {
         if(!Auth::user()->isAdmin() && $post->user_id !== Auth::id()){
             abort(403);
+        }
+        if ($post->cover_image) {
+            Storage::delete($post->cover_image);
         }
         $post->delete();
         return redirect()->route('admin.posts.index')->with('message', "$post->title deleted succesfully");

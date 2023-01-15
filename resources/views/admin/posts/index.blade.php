@@ -33,12 +33,19 @@
                         <th scope="row">{{$post->id}}</th>
                         <td><a class="text-decoration-none" href="{{route('admin.posts.show', $post->slug)}}" title="View Post">{{$post->title}}</a></td>
                         <td>
-                            @foreach ($categories as $category)
-                                @if( $category->id == $post->category_id)   
-                                    <p>{{$category->name}}</p>
-                                @endif
-                            @endforeach
+                            @if ($post->category_id)
+                                @foreach ($categories as $category)
+                                    @if( $category->id == $post->category_id)   
+                                        <p>{{$category->name}}</p>
+                                    @endif
+                                @endforeach
+                            @else
+                                <p>{{'Senza categoria'}}</p>
+                            @endif
+
                             {{--
+                                {{$post->category ? $post->category->name : 'Senza categoria'}}
+
                                 LAVORA SU INDEX ID MA SE LE POSIZIONI NON SONO CONSECUTIVE VA IN ERRORE
                                 <p>{{$categories[(($post->category_id) - 1)]->name}}</p>
                             --}}
