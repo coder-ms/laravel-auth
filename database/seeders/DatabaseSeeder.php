@@ -24,7 +24,8 @@ class DatabaseSeeder extends Seeder
         //Lancio tutti i seeder in contemporanea
         $this->call([
             PostTableSeeder::class,
-            CategorySeeder::class
+            CategorySeeder::class,
+            TagSeeder::class
         ]);
     }
 }
