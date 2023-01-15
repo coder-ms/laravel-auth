@@ -9,6 +9,7 @@ use App\Models\Post;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Category;
+use App\Models\Tag;
 
 class PostController extends Controller
 {
@@ -55,7 +56,8 @@ class PostController extends Controller
     {
         $lvl_diff_max =  PostController::$level_diff_max;
         $categories = Category::all();
-        return view('admin.posts.create', compact('categories', 'lvl_diff_max'));
+        $tags = Tag::all();
+        return view('admin.posts.create', compact('categories', 'lvl_diff_max', 'tags'));
     }
 
     /**
@@ -108,7 +110,8 @@ class PostController extends Controller
     {
         $lvl_diff_max =  PostController::$level_diff_max;
         $categories = Category::all();
-        return view('admin.posts.edit', compact('post', 'categories', 'lvl_diff_max'));
+        $tags = Tag::all();
+        return view('admin.posts.edit', compact('post', 'categories', 'lvl_diff_max', 'tags'));
     }
 
     /**
