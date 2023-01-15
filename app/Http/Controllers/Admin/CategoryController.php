@@ -44,6 +44,7 @@ class CategoryController extends Controller
         $data['name'] = $request->name;
         // dd($data);
         $new_category = Category::create($data);
+        //dd($new_category);
         return redirect()->route('admin.categories.show', $new_category->slug);
     }
 
@@ -54,6 +55,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
+        //dd($category);
         return view('admin.categories.show', compact('category'));
     }
 
