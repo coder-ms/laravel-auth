@@ -85,6 +85,9 @@ class PostController extends Controller
         
         //dd($data);
         $new_post = Post::create($data);
+        if ($request->has('tags')) {
+            $new_post->tags()->attach($request->tags);
+        }
         return redirect()->route('admin.posts.show', $new_post->slug);
     }
 
@@ -142,7 +145,13 @@ class PostController extends Controller
             $data['cover_image'] = $path;
         }
         //dd($data);
+ 
         $post->update($data);
+
+        if ($request->has('tags')) {
+            $post->tags()->sync($request->tags);
+        }
+
         return redirect()->route('admin.posts.index')->with('message', "$post->title updated successfully");
     }
 

@@ -34,24 +34,35 @@ main{
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
-}
-
-/*
-.cardx {
-    background-color: transparent;
-    width: 45%;
-    height: 40vh;
-    text-decoration: none;
-    margin: 20px 10px;
-    border: 1px solid black;
-
-    .cardDescriptionx {
+    .cardShow {
+      width: 80%;
+      height: 55vh;
+      margin: 0 auto;
+      display: flex;
+    }
+    
+    .cardImageShow{
+      height: 100%;
+      padding: 10px;
+      width: 100%;
+      background-color: #bbb;
+      img{
+          width: 100%;
+      }
+    }
+    .cardDescriptionShow{
+        height:100%;
+        padding-top: 30px;
+        line-height: 1.2;
+        font-size: 16px;
+        width: 100%;
         padding: 10px;
-        height: 100%;
         background-color: #bbb;
         color: black;
         font-weight: 700;
     }
 }
-*/
+
+
+
 
