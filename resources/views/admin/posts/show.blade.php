@@ -22,7 +22,6 @@
                         @endforeach
                     </ul>
                 @endif
- 
                 <a href="{{route('admin.posts.index', $post->slug)}}" class="btn btn-primary">INDIETRO</a>
                 <a href="{{route('admin.posts.edit', $post->slug)}}" class="btn btn-secondary">MODIFICA</a>
                 <form action="{{route('admin.posts.destroy', $post->slug)}}" method="POST" class=" d-inline">
