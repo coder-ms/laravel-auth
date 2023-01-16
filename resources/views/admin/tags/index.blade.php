@@ -2,9 +2,17 @@
 
 @section('content')
     <h1>Tags / Technologies</h1>
-    <div class="text-end">
-        <a class="btn btn-success" href="{{--route('admin.tags.create')--}}">Crea nuova tag</a>
-    </div>
+    {{-- <div class="text-end">
+        <a class="btn btn-success" href="route('admin.tags.create')">Crea nuova tag</a>
+    </div> --}}
+
+    <form action="{{route('admin.tags.store')}}" method="post" class="d-flex align-items-center">
+        @csrf
+        <div class="input-group mb-3">
+            <input type="text" name="name" class="form-control" placeholder="Add a Tag name here" aria-label="Recipient's username" aria-describedby="button-addon2">
+            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Add</button>
+        </div>
+    </form>
 
     @if(session()->has('message'))
     <div class="alert alert-success mb-3 mt-3">
@@ -22,21 +30,33 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($tags as $tag)
-                <tr>
-                    <th scope="row">{{$tag->id}}</th>
-                    <td>{{$tag->name}} {{--<a href="{{route('admin.tags.show', $tag->slug)}}" title="View Tag"></a>--}}</td>
-                    <td>{{--{{count($tag->posts)}}--}}</td>
-                    <td>{{--<a class="link-secondary" href="{{route('admin.tags.edit', $tag->slug)}}" title="Edit Category"><i class="fa-solid fa-pen"></i></a>--}}</td>
-                    <td>
-                        <form action="{{route('admin.tags.destroy', $tag->slug)}}" method="POST">
+            @foreach($tags as $tag)
+            <tr>
+                <th scope="row">{{$tag->id}}</th>
+                <td>
+                    <form id="tag-{{$tag->id}}" action="{{route('admin.tags.update', $tag->slug)}}" method="post">
                         @csrf
-                        @method('DELETE')
-                        <button type="submit" class="delete-button btn btn-danger ms-3" data-item-title="{{$tag->name}}"><i class="fa-solid fa-trash-can"></i></button>
-                     </form>
-                    </td>
-                </tr>
-        @endforeach
+                        @method('PATCH')
+                        <input class="border-0 bg-transparent" type="text" name="name" value="{{$tag->name}}">
+                    </form>
+
+                </td>
+
+                <td>
+
+                </td>
+                <td>
+
+                </td>
+                <td>
+                    <form action="{{route('admin.tags.destroy', $tag->slug)}}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="delete-button btn btn-danger ms-3" data-item-title="{{$tag->name}}"><i class="fa-solid fa-trash-can"></i></button>
+                 </form>
+                </td>
+            </tr>
+    @endforeach
         </tbody>
     </table>
     @include('partials.admin.modal-delete')

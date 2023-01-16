@@ -85,6 +85,7 @@ class PostController extends Controller
         
         //dd($data);
         $new_post = Post::create($data);
+        
         if ($request->has('tags')) {
             $new_post->tags()->attach($request->tags);
         }

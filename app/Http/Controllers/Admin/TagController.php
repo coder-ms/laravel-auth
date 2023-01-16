@@ -7,6 +7,7 @@ use App\Models\Tag;
 use App\Http\Requests\StoreTagRequest;
 use App\Http\Requests\UpdateTagRequest;
 
+
 class TagController extends Controller
 {
     /**
@@ -25,20 +26,26 @@ class TagController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
+    // public function create()
+    // {
+    //     //
+    // }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StoreTagRequest  $request
-     * @return \Illuminate\Http\Response
+     * 
      */
     public function store(StoreTagRequest $request)
     {
-        //
+        $val = $request->validated();
+        $slug = Tag::generateSlug($request->name);
+        $val['slug'] = $slug;
+
+        Tag::create($val);
+
+        return redirect()->back()->with('message', "Tag $slug added succesfully");
     }
 
     /**
@@ -47,10 +54,10 @@ class TagController extends Controller
      * @param  \App\Models\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function show(Tag $tag)
-    {
-        //
-    }
+    // public function show(Tag $tag)
+    // {
+    //     //
+    // }
 
     /**
      * Show the form for editing the specified resource.
@@ -58,10 +65,10 @@ class TagController extends Controller
      * @param  \App\Models\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function edit(Tag $tag)
-    {
-        //
-    }
+    // public function edit(Tag $tag)
+    // {
+    //     //
+    // }
 
     /**
      * Update the specified resource in storage.
@@ -72,7 +79,12 @@ class TagController extends Controller
      */
     public function update(UpdateTagRequest $request, Tag $tag)
     {
-        //
+        $val_data = $request->validated();
+        $slug = Tag::generateSlug($request->name);
+        $val_data['slug'] = $slug;
+        $tag->update($val_data);
+
+        return redirect()->back()->with('message', "Tag $slug update succesfully");
     }
 
     /**
@@ -83,6 +95,7 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        //
+        $tag->delete();
+        return redirect()->back()->with('message', "Tag $tag->name removed succesfully");
     }
 }

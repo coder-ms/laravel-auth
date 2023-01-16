@@ -86,7 +86,7 @@
                         <option value="">No tag</option>
                       @endforelse
                     </select>
-                  </div>
+                  </div> 
                   <button type="submit" class="btn btn-success">Submit</button>
                   <button type="reset" class="btn btn-primary">Reset</button>
             </form>
