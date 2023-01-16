@@ -14,7 +14,7 @@
                 @if ($post->category)
                     <p>Category: {{$post->category->name}}</p>
                 @endif
-                
+                <p>Tags: </p>
                 @if ($post->tags && count($post->tags) > 0 )
                     <ul>
                         @foreach($post->tags as $tag)
