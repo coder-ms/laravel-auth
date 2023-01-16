@@ -5,6 +5,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
+use Illuminate\Support\Facades\Auth;
+
 
 class CategoryController extends Controller
 {
@@ -53,9 +55,23 @@ class CategoryController extends Controller
      *
      * @param  \App\Models\Category  $category
      */
-    public function show(Category $category)
+    // public function show(Category $category)
+    // {
+    //     //dd($category);
+    //     return view('admin.categories.show', compact('category'));
+    // }
+    
+    public function show($slug)
     {
-        //dd($category);
+        if(Auth::user()->isAdmin()){
+            $category = Category::where('slug', $slug)->first();
+        } else {
+            $category = Category::where('slug', $slug)->with([
+                'posts' => function ($query) {
+                    $query->where('user_id', Auth::id());
+                }
+            ])->first();
+        }
         return view('admin.categories.show', compact('category'));
     }
 
