@@ -6,10 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Auth;
 use App\Models\Category;
 use App\Models\Tag;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
+
 
 class PostController extends Controller
 {
@@ -151,6 +152,9 @@ class PostController extends Controller
 
         if ($request->has('tags')) {
             $post->tags()->sync($request->tags);
+        }
+        else {
+            $post->tags()->sync([]);
         }
 
         return redirect()->route('admin.posts.index')->with('message', "$post->title updated successfully");

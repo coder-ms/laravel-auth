@@ -2,7 +2,7 @@
 
 @section('content')
 
-    {{-- <div>
+    <div>
         @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -12,7 +12,7 @@
             </ul>
         </div>
         @endif
-    </div> --}}
+    </div>
     <h1 class="text-center">CREATE POST</h1>
     <div class="row bg-white">
         <div class="col-12">
@@ -33,8 +33,8 @@
                   
                   <div class="mb-3">
                     <label for="category_id" class="form-label">Seleziona categoria di framework:</label>
-                    <select name="category_id" id="category_id" class="form-control @error('category_id') is-invalid @enderror">
-                      <option value="">Select category</option>
+                    <select name="category_id" id="category_id" class="form-control @error('category_id') is-invalid @enderror"> 
+                      <option value="">Seleziona Categoria di Framework</option>
                       @foreach ($categories as $category)
                           <option value="{{$category->id}}">{{$category->name}}</option>
                       @endforeach
