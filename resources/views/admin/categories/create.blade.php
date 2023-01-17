@@ -21,10 +21,11 @@
                 @csrf
                   <div class="mb-3">
                     <label for="name" class="form-label">Nome</label>
-                    <input type="text" class="form-control @error('title') is-invalid @enderror" id="name" name="name">
+                    <input type="text" class="form-control @error('title') is-invalid @enderror" id="name" name="name" required maxlength="50" minlength="3">
                     @error('title')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
+                    <div class="form-text">* Minimo 3 caratteri massimo 50 caratteri</div>
                   </div>
 
                   <button type="submit" class="btn btn-success">Submit</button>

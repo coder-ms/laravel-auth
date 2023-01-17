@@ -21,11 +21,12 @@
                 @csrf
                   <div class="mb-3">
                     <label for="title" class="form-label">Titolo</label>
-                    <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title">
+                    <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" required maxlength="150" minlength="3">
                     @error('title')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
-                  </div>
+                    <div class="form-text">* Minimo 3 caratteri massimo 150 caratteri</div>
+                 </div>
                   <div class="mb-3">
                     <label for="content" class="form-label">Contenuto</label>
                     <textarea class="form-control" id="content" name="content"></textarea>
@@ -34,7 +35,7 @@
                   <div class="mb-3">
                     <label for="category_id" class="form-label">Seleziona categoria di framework:</label>
                     <select name="category_id" id="category_id" class="form-control @error('category_id') is-invalid @enderror"> 
-                      <option value="">Seleziona Categoria di Framework</option>
+                      <option value="">Framework</option>
                       @foreach ($categories as $category)
                           <option value="{{$category->id}}">{{$category->name}}</option>
                       @endforeach
@@ -60,6 +61,7 @@
                   </div>
 
                   <div class="mb-3">
+                    <img id="uploadPreview" width="100" src="https://via.placeholder.com/300x200">
                     <label for="cover_image" class="form-label">Immagine</label>
                     <input type="file" name="cover_image" id="cover_image" class="form-control  @error('cover_image') is-invalid @enderror" >
                     @error('cover_image')
@@ -98,9 +100,8 @@
             
         </div>
     </div>
-    {{-- <script src="//js.nicedit.com/nicEdit-latest.js" type="text/javascript">
-    </script>
+    <script src="//js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
     <script type="text/javascript">
       bkLib.onDomLoaded(nicEditors.allTextAreas);
-    </script> --}}
+    </script>
 @endsection
