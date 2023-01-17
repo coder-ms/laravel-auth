@@ -67,7 +67,7 @@
                     @enderror
                   </div>
 
-                  <div class="mb-3">
+                  {{-- <div class="mb-3">
                     <label for="tags" class="form-label">Tags</label>
                     <select multiple class="form-select" name="tags[]" id="tags" >
                       <option value="">Select tag</option>
@@ -77,7 +77,20 @@
                         <option value="">No tag</option>
                       @endforelse
                     </select>
-                  </div> 
+                  </div>  --}}
+
+                  <div class="mb-3">
+                    <label for="tags" class="form-label">Tags</label>
+                    <select multiple class="form-select" name="tags[]" id="tags">
+                        @forelse ($tags as $tag)
+                        <option value="{{$tag->id}}">{{$tag->name}}</option>
+                        @empty
+                            <option value="">No tag</option>
+                        @endforelse
+
+                    </select>
+
+                  </div>
 
                   <button type="submit" class="btn btn-success">Submit</button>
                   <button type="reset" class="btn btn-primary">Reset</button>
@@ -85,5 +98,9 @@
             
         </div>
     </div>
-
+    {{-- <script src="//js.nicedit.com/nicEdit-latest.js" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+      bkLib.onDomLoaded(nicEditors.allTextAreas);
+    </script> --}}
 @endsection

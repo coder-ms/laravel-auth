@@ -72,7 +72,7 @@
                     </div>
                   </div>
 
-                  <div class="mb-3">
+                  {{-- <div class="mb-3">
                     <label for="tags" class="form-label">Tags</label>
                     <select multiple class="form-select" name="tags[]" id="tags" >
                       <option value="">Select tag</option>
@@ -86,7 +86,24 @@
                         <option value="">No tag</option>
                       @endforelse
                     </select>
-                  </div> 
+                  </div>  --}}
+
+                  <div class="mb-3">
+                    @foreach ($tags as $tag)
+                    <div class="form-check form-check-inline">
+
+                        @if (old("tags"))
+                            <input type="checkbox" class="form-check-input" id="{{$tag->slug}}" name="tags[]" value="{{$tag->id}}" {{in_array( $tag->id, old("tags", []) ) ? 'checked' : ''}}>
+                        @else
+                            <input type="checkbox" class="form-check-input" id="{{$tag->slug}}" name="tags[]" value="{{$tag->id}}" {{$post->tags->contains($tag) ? 'checked' : ''}}>
+                        @endif
+                        <label class="form-check-label" for="{{$tag->slug}}">{{$tag->name}}</label>
+                    </div>
+                    @endforeach
+                    @error('tags')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                  </div>
                   <button type="submit" class="btn btn-success">Submit</button>
                   <button type="reset" class="btn btn-primary">Reset</button>
             </form>
